@@ -4,8 +4,10 @@ $accent: #860000 // Accent Color
 $grey: #ccc
 $fontsize: 16px // Body Font Size
 $textcolor: #0f0f0f // Text Color
+$link-hover-bg-color: #b54958
 $system: -apple-system, BlinkMacSystemFont, Arial, sans-serif // System Font Family
 $roboto: Roboto, sans-serif // Roboto Font Family
+$block-header-width: 90%
 
 // Bootstrap compatible gutter variable => $gutter
 $grid-gutter-width: 20px
@@ -33,6 +35,9 @@ input, textarea
 	&:required:valid
 		border-color: green
 
+html
+	scroll-behavior: smooth
+
 body
 	font-family: $roboto
 	font-size: $fontsize
@@ -42,6 +47,40 @@ body
 	overflow-x: hidden
 	color: $textcolor
 
+a, a:hover
+	text-decoration: none
+
 .container
 	min-width: 320px
 	margin: 0 auto
+
+.block
+	padding: 1rem 2rem
+
+.block__header
+	width: $block-header-width
+	margin: 0 auto 1rem
+	text-align: center
+	color: $accent
+	border-bottom: 1px solid $accent
+
+.list
+	list-style: none
+	padding: 0
+	text-align: center
+
+.list__item
+
+.list__link
+	display: block
+	width: 100%
+	margin: 3px 0
+	padding: 10px 15px
+	color: $accent
+	text-decoration: none
+	&:hover
+		background: $link-hover-bg-color
+		color: #fff
+	&_active
+		background: $accent
+		color: #fff

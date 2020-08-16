@@ -11,6 +11,7 @@ let paths = {
 	scripts: {
 		src: [
 			'node_modules/jquery/dist/jquery.min.js', // npm vendor example (npm i --save-dev jquery)
+      // baseDir + '/js/**/*',
 			baseDir + '/js/app.js' // app.js. Always at the end
 		],
 		dest: baseDir + '/js',
@@ -23,13 +24,13 @@ let paths = {
 
 	images: {
 		src:  baseDir + '/images/src/**/*',
-		dest: baseDir + '/images/dest',
+		dest: baseDir + '/images/dest/',
 	},
 
 	deploy: {
-		hostname:    'username@yousite.com', // Deploy hostname
-		destination: 'yousite/public_html/', // Deploy destination
-		include:     [/* '*.htaccess' */], // Included files to deploy
+		hostname:    'ftpupload.net', // Deploy hostname
+		destination: 'sproogigybadGobl1981.badhost.ru', // Deploy destination
+		include:     ['*.htaccess'], // Included files to deploy
 		exclude:     [ '**/Thumbs.db', '**/*.DS_Store' ], // Excluded files from deploy
 	},
 
@@ -41,8 +42,8 @@ let paths = {
 // LOGIC
 
 const { src, dest, parallel, series, watch } = require('gulp');
+const rjs          = require('gulp-requirejs');
 const sass         = require('gulp-sass');
-const scss         = require('gulp-sass');
 const less         = require('gulp-less');
 const styl         = require('gulp-stylus');
 const cleancss     = require('gulp-clean-css');
@@ -93,18 +94,32 @@ function cleanimg() {
 }
 
 function deploy() {
-	return src(baseDir + '/')
+	return src('dist/**')
 	.pipe(rsync({
-		root: baseDir + '/',
+		root: 'dist/',
 		hostname: paths.deploy.hostname,
 		destination: paths.deploy.destination,
 		include: paths.deploy.include,
 		exclude: paths.deploy.exclude,
+    progress: true,
+    port: 21,
 		recursive: true,
 		archive: true,
 		silent: false,
 		compress: true
 	}))
+}
+
+function createDist() {
+  return src([
+    'app/css/**/*.css',
+    'app/js/**/*.js',
+    'app/images/dest/**/*',
+    'app/**/*.html',
+    'app/fonts/**/*.woff2',
+    'app/.htaccess',
+  ], {base: 'app'})
+  .pipe(dest('dist/'))
 }
 
 function startwatch() {
@@ -121,4 +136,5 @@ exports.scripts     = scripts;
 exports.images      = images;
 exports.cleanimg    = cleanimg;
 exports.deploy      = deploy;
+exports.createDist  = createDist;
 exports.default     = parallel(images, styles, scripts, browsersync, startwatch);

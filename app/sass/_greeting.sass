@@ -1,0 +1,21 @@
+@import '_mixins/_positioning'
+
+.greeting
+	font-family: Lato, sans-serif
+	font-size: 15px
+	font-weight: 400
+
+.reasons-header
+	border-bottom: solid 1px $accent
+
+.reasons
+	list-style: none outside
+	padding: 0
+	&__item
+		+margined(5px, 0, 5px, 0)
+		padding: 5px
+		border: solid 1px $accent
+		transition: border .2s linear
+		list-style: none
+		&:hover
+			border-left: 4px solid $accent

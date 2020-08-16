@@ -1,0 +1,19 @@
+@import '_mixins/_flexbox'
+@import '_mixins/_positioning'
+
+.pane
+	+flexbox(column, center, center)
+	&__img
+		width: 80%
+		height: auto
+		border: 1px solid $accent
+		box-sizing: border-box
+		+paddedSimple(10px)
+		+margined(1px, 0, 1px, 0)
+		&_scalable
+			transition: transform .2s linear, padding .2s linear
+			&:hover
+				padding: 0
+		    transform: scale(1.05)
+	&_hide
+		display: none
