@@ -1,0 +1,34 @@
+@import "_mixins/_positioning"
+
+.summary
+  width: 100%
+  font-size: .9em
+  +flexbox(row, center, center)
+  +margined(.2em, 0, .2em, 0)
+  &__header
+    +marginedSimple(0)
+    +paddedSimple(1em)
+    background: $accent
+    color: #ffffffc9
+    transition: color .5s linear, 'text-shadow' .5s linear
+    font-weight: 400
+    text-align: left
+    width: 100%
+    outline: none
+    border: none
+    &:hover
+      color: #fff
+      text-shadow: 1px 1px
+  &__body
+    transform: scale(0)
+    opacity: 0
+    display: none
+    transition: all .5s linear
+    +padded(0, 1em, 0, 1em)
+    +marginedSimple(0)
+    &_visible
+      display: block
+      border: 1px solid $accent
+    &_visible_height
+      transform: scale(1)
+      opacity: 1

@@ -2,18 +2,27 @@
 @import '_mixins/_positioning'
 
 .pane
-	+flexbox(column, center, center)
+	+flexbox(column, center, flex-start)
+	border: 1px solid $accent
+	padding: 1em
+	&__caption
+		padding: 0 0 .5rem 0
+	&__text
+		display: block
+		width: 100%
 	&__img
-		width: 80%
+		width: 90%
 		height: auto
-		border: 1px solid $accent
 		box-sizing: border-box
 		+paddedSimple(10px)
 		+margined(1px, 0, 1px, 0)
 		&_scalable
 			transition: transform .2s linear, padding .2s linear
 			&:hover
-				padding: 0
-		    transform: scale(1.05)
+		    transform: scale(1.1)
+	&__cost
+		width: 100%
+		text-align: right
+		color: $accent
 	&_hide
 		display: none
