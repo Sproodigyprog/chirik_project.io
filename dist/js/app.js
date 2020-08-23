@@ -16,9 +16,14 @@ function createMainNav() {
     navLink.setAttribute("href", `${navAnchors[ind]}`)
     navLink.innerText = item
 
+
     navItem.appendChild(navLink)
     navList.appendChild(navItem)
   })
+    // navLink.addEventListener('click', function() {
+    //   this.classList.add('header--item__link_active')
+    //   // link.classList.remove('header--item__link_active')
+    // })
 
   nav.classList.add('header--menu')
   navList.classList.add('header--list')
@@ -256,12 +261,9 @@ function createFaqItem(summ, det, idPart  ) {
   summaryHeader.classList.add('summary__header')
   summaryBody.classList.add('summary__body')
 
-  // summaryLink.setAttribute('href', `#collapsed${idPart}`)
-  // summaryLink.setAttribute('data-collapse', `collapsed${idPart}`)
-  // summaryBody.id = `collapsed${idPart}`
-
   summaryHeader.addEventListener('click', function() {
     const content = this.nextElementSibling
+    this.classList.toggle('summary__header_active')
 
     if (content.classList.contains('summary__body_visible')) {
       content.classList.remove('summary__body_visible_height')
@@ -326,13 +328,30 @@ function createFaq() {
       faq.appendChild(createFaqItem(data, summary[data], ind))
     }
   })
-  // faq.appendChild(createServicesList())
-  // faq.appendChild(createTabPane('Индивидуально'))
-  // faq.appendChild(createTabPane('Для пары'))
-  // faq.appendChild(createTabPane('Студентам'))
   document.querySelector('.main').appendChild(faq)
 }
 createFaq()
+
+// contacts
+
+function createContacts() {
+  const contacts = document.createElement('section')
+  const header = document.createElement('h1')
+  const map = document.createElement('div')
+
+  header.classList.add('block__header')
+  header.id = 'contacts'
+  header.innerText = 'Контакты'
+
+  contacts.classList.add('block', 'contacts')
+  map.innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2389.58043641256!2d50.195087015936835!3d53.20744039280746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41661ea79d4cdfdd%3A0x8dc5a583515dc018!2z0YPQuy4g0JTRi9Cx0LXQvdC60L4sIDMwLCDQodCw0LzQsNGA0LAsINCh0LDQvNCw0YDRgdC60LDRjyDQvtCx0LsuLCA0NDMwNDU!5e0!3m2!1sru!2sru!4v1598126148342!5m2!1sru!2sru" width="100%" height="330" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>`
+
+  contacts.appendChild(header)
+  contacts.appendChild(map)
+
+  document.querySelector('.main').appendChild(contacts)
+}
+createContacts()
 
 // footer
 
@@ -346,13 +365,23 @@ function addFooter() {
 }
 addFooter()
 
-
 document.addEventListener("DOMContentLoaded", function() {
 
   // burger
 
   $('.header--burger').click(function(event) {
     $('.header--burger, .header--menu').toggleClass('active');
+  })
+
+  // header links
+
+  $('.header--item__link').click(function() {
+    const linksList = $('.header--item__link')
+
+    for (let link of linksList) {
+      if ($(link).hasClass('header--item__link_active')) $(link).removeClass('header--item__link_active')
+      $(this).addClass('header--item__link_active')
+    }
   })
 
   // services panes
@@ -373,6 +402,16 @@ document.addEventListener("DOMContentLoaded", function() {
       if (name === $(this).text()) $(pane).removeClass('pane_hide')
     }
   })
+
+  // $(".header--item__link").click(function() {
+  //   $.getJSON("/json/faq.json", function(result, status){
+  //     $.each(result, function(i, field){
+  //       // $("body").append(field + " ");
+  //       console.log(field, i)
+  //       // console.log(JSON.parse(result))
+  //     });
+  //   });
+  // });
 
   // scroll sections
 

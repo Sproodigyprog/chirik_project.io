@@ -403,6 +403,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 
+  // $(".header--item__link").click(function() {
+  //   $.getJSON("/json/faq.json", function(result, status){
+  //     $.each(result, function(i, field){
+  //       // $("body").append(field + " ");
+  //       console.log(field, i)
+  //       // console.log(JSON.parse(result))
+  //     });
+  //   });
+  // });
+
   // scroll sections
 
   // $("a.header--item").click(function () {
