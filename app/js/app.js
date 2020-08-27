@@ -155,12 +155,12 @@ function createServicesList() {
   const services = ['Индивидуально', 'Для пары', 'Студентам']
   const list = document.createElement('ul')
 
-  services.forEach(item => {
+  services.forEach((item, ind) => {
     const listItem = document.createElement('li')
     const listLink = document.createElement('a')
 
     listItem.classList.add('list__item')
-    listLink.classList.add('list__link')
+    ind === 0 ? listLink.classList.add('list__link', 'list__link_active') : listLink.classList.add('list__link')
     listLink.setAttribute('href', '#services')
     listLink.innerText = item
 
